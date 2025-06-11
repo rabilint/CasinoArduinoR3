@@ -37,7 +37,7 @@ int printWin(int bank, int TypeOfWin)
     case 0:
         break;
     }
-    winLEDAni(greenLedPin);
+
     return bank;
 }
 
@@ -58,7 +58,7 @@ int kindOfWin(int bank)
         bank += 50;
         printLose(bank);
 
-    }
+    }else winLEDAni(greenLedPin);
     return bank;
 }
 
