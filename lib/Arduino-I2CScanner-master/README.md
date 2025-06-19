@@ -67,7 +67,7 @@ void loop()
 }
 ```
 
-* Check: Ejemplo que muestra el uso de I2CScanner, almacenando los resultados de check en un array, que luego usariamos en el código.
+* Check: Ejemplo que muestra el uso de I2CScanner, almacenando los resultados de check en un arrOfGameay, que luego usariamos en el código.
 ```c++
 #include "I2CScanner.h"
 

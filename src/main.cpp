@@ -3,6 +3,7 @@
 #include "instruments.h"
 #include "automat.h"
 #include "config.h"
+#include "menu.h"
 /*
  sudo chmod 777 /dev/ttyACM0   <--- this command give access to port.
 
@@ -17,7 +18,7 @@ Plans:
 Add BlackJack
 Add roulette
 Add clients profiles with saving their "progress" in a file.
-
+create Menu.
 */
 
 
@@ -25,14 +26,20 @@ Add clients profiles with saving their "progress" in a file.
 int bank = 10000;
 
 LiquidCrystal_I2C lcd(LCD_ADDRESS, LCD_COLS, LCD_ROWS);
+String arrOfGame[4] = {"Create User", "Automat", "Blackjack","Poker"};
 
 bool buttonAlreadyPressed = false;
+bool secButAlreadyPressed = false;
 // variables will change:
 int buttonState = 0;  // variable for reading the pushbutton status
+int secButtonState = 0;  // variable for reading the pushbutton status
 // int randNum;
+int userSelectPos = 0;
 
 void setup() {
     randomSeed(analogRead(0));
+
+
     Serial.begin(9600);
     // initialize the LED pin as an output:
     pinMode(yellowLedPin, OUTPUT);
@@ -49,35 +56,103 @@ void setup() {
     lcd.setCursor(0, 0);
     lcd.print("Welcome to Casino");
 
+    delay(800);
+    renderMenu(userSelectPos);
+
 }
 
 void loop() {
+
+
     // read the state of the pushbutton value:
     buttonState = digitalRead(buttonPin);
+    secButtonState = digitalRead(secButtonPin);
+    if (secButtonState == HIGH)
+    {
+        switch (secButAlreadyPressed)
+        {
+
+            case false:
+            delay(100);
+
+            Serial.println("-----------------------------------------");
+            Serial.println( "Amount of games in arrOfGame arr: " + String( sizeof(arrOfGame) / sizeof(arrOfGame[0])) ) ; // some Debug code
+            Serial.println("----------------------------------------");
+
+
+            if (userSelectPos ==  (sizeof(arrOfGame)  / sizeof(arrOfGame[0]) ) - 1 )
+            {
+                userSelectPos = 0;
+            } else
+            {
+                userSelectPos++;
+            }
+            renderMenu(userSelectPos);
+
+            Serial.print(userSelectPos);
+            buttonAlreadyPressed = true;
+            break;
+        case true:
+            Serial.println("Button already pressed.");
+
+            break;
+        }
+    }
+    else
+    {
+        secButAlreadyPressed = false;
+    }
 
     // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
     if (buttonState == HIGH) {
-
-
-        Serial.println("----------------------------");
-
         switch (buttonAlreadyPressed)
         {
             case false:
-                Serial.println("----------------------------");
-                Serial.println("bank: " + String(bank));
-                Serial.println("----------------------------");
+
+
+                switch (userSelectPos)
+                {
+                    case 0:
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
+
+                    break;
+                    case 1:
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
+                    break;
+                    case 2:
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
+
+                    break;
+                    case 3:
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
+
+                    break;
+                    case 4:
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
+
+                    break;
+
+
+                }
 
 
 
-                proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
 
-                bank = kindOfWin(bank);
 
                 buttonAlreadyPressed = true;
             break;
             case true:
-                Serial.println("Button already pressed. No random needed.");
+                Serial.println("Button already pressed.");
         }
 
     } else {

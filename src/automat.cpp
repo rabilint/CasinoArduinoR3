@@ -14,6 +14,7 @@ int printLose(int bank)
     printInfo(bank);
     lcd.print("Lose...");
     loseLEDAni(redLedPin);
+    return 0;
 }
 int printWin(int bank, int TypeOfWin)
 {
@@ -47,9 +48,9 @@ int kindOfWin(int bank)
     int TypeOfWin = 0;
         if (random(1,25) == random(1,40) && bank > 102 ) TypeOfWin = 1; // Client win 100$
 
-        if (random(1,50) == random(1,75) == random(1,25) && bank > 502) TypeOfWin = 2; // Client win 500$
+        if (( random(1,50) == random(1,75) ) == random(1,25) && bank > 502) TypeOfWin = 2; // Client win 500$
 
-        if (random(1,100) == random(1,100) == random(1,100)) TypeOfWin = 3; // Jackpot
+        if ( ( random(1,100) == random(1,100) ) == random(1,100)) TypeOfWin = 3; // Jackpot
 
         bank = printWin(bank, TypeOfWin);
     if (TypeOfWin == 0)
