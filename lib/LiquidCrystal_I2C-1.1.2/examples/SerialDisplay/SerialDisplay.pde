@@ -19,9 +19,9 @@ void setup()
 
 void loop()
 {
-  // when characters arrOfGameive over the serial port...
+  // when characters arrive over the serial port...
   if (Serial.available()) {
-    // wait a bit for the entire message to arrOfGameive
+    // wait a bit for the entire message to arrive
     delay(100);
     // clear the screen
     lcd.clear();
