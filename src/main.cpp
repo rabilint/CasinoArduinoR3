@@ -22,7 +22,7 @@ Add clients profiles with saving their "progress" in a file.
 create Menu.
 
 */
-
+// dffdf
 
 
 int bank = 10000;
