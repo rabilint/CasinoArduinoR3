@@ -18,7 +18,9 @@ Plans:
 Add BlackJack
 Add roulette
 Add clients profiles with saving their "progress" in a file.
+
 create Menu.
+
 */
 
 
@@ -112,37 +114,37 @@ void loop() {
 
                 switch (userSelectPos)
                 {
-                    case 0:
+                case 0:
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
 
                     break;
-                    case 1:
-                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
-                    bank = kindOfWin(bank);
-                    // temporary there's only automat in any case.
-                    break;
-                    case 2:
-                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
-                    bank = kindOfWin(bank);
-                    // temporary there's only automat in any case.
+            case 1:
 
+
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
                     break;
-                    case 3:
+            case 2:
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
 
                     break;
-                    case 4:
+            case 3:
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
 
                     break;
+            case 4:
+                    proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
+                    bank = kindOfWin(bank);
+                    // temporary there's only automat in any case.
 
-
+                    break;
                 }
 
 
