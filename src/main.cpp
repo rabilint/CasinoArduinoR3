@@ -48,7 +48,7 @@ void setup() {
     pinMode(redLedPin, OUTPUT);
     pinMode(greenLedPin, OUTPUT);
     // initialize the pushbutton pin as an input:
-    pinMode(buttonPin, INPUT);
+    pinMode(firstButtonPin, INPUT);
 
     // Serial.println(randNum);
 
@@ -67,14 +67,12 @@ void loop() {
 
 
     // read the state of the pushbutton value:
-    buttonState = digitalRead(buttonPin);
+    buttonState = digitalRead(firstButtonPin);
     secButtonState = digitalRead(secButtonPin);
     if (secButtonState == HIGH)
     {
-        switch (secButAlreadyPressed)
+        if (!secButAlreadyPressed)
         {
-
-            case false:
             delay(100);
 
             Serial.println("-----------------------------------------");
@@ -93,12 +91,11 @@ void loop() {
 
             Serial.print(userSelectPos);
             buttonAlreadyPressed = true;
-            break;
-        case true:
+        }else
+        {
             Serial.println("Button already pressed.");
-
-            break;
         }
+
     }
     else
     {
