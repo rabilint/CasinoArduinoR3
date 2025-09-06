@@ -3,6 +3,7 @@
 #include "instruments.h"
 #include "automat.h"
 #include "config.h"
+#include "blackjack.h"
 #include "menu.h"
 /*
  sudo chmod 777 /dev/ttyACM0   <--- this command give access to port.
@@ -22,7 +23,7 @@ Add clients profiles with saving their "progress" in a file.
 create Menu.
 
 */
-// dffdf
+//
 
 
 int bank = 10000;
@@ -35,6 +36,7 @@ bool secButAlreadyPressed = false;
 // variables will change:
 int buttonState = 0;  // variable for reading the pushbutton status
 int secButtonState = 0;  // variable for reading the pushbutton status
+int fourButtonState = 0;  // variable for reading the pushbutton status
 // int randNum;
 int userSelectPos = 0;
 
@@ -69,6 +71,7 @@ void loop() {
     // read the state of the pushbutton value:
     buttonState = digitalRead(firstButtonPin);
     secButtonState = digitalRead(secButtonPin);
+
     if (secButtonState == HIGH)
     {
         if (!secButAlreadyPressed)
@@ -104,11 +107,10 @@ void loop() {
 
     // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
     if (buttonState == HIGH) {
-        switch (buttonAlreadyPressed)
+        if (!buttonAlreadyPressed)
         {
-            case false:
-
-
+            if (userSelectPos == 1)
+            {
                 switch (userSelectPos)
                 {
                 case 0:
@@ -117,26 +119,26 @@ void loop() {
                     // temporary there's only automat in any case.
 
                     break;
-            case 1:
+                case 1:
 
 
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
                     break;
-            case 2:
+                case 2:
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
 
                     break;
-            case 3:
+                case 3:
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
 
                     break;
-            case 4:
+                case 4:
                     proccessLEDAni(yellowLedPin);  // Here should be animation of gambling
                     bank = kindOfWin(bank);
                     // temporary there's only automat in any case.
@@ -145,13 +147,28 @@ void loop() {
                 }
 
 
-
-
-
                 buttonAlreadyPressed = true;
-            break;
-            case true:
-                Serial.println("Button already pressed.");
+            }else if (userSelectPos == 2)
+            {
+                do
+                {
+                    fourButtonState = digitalRead(fourButtonPin);
+                    lcd.setCursor(0, 0);
+                    lcd.print("Blackjack");
+                    lcd.setCursor(0, 1);
+                    lcd.print("Still wanna play?");
+                    if (secButtonState == HIGH)
+                    {
+                        if (!secButAlreadyPressed)
+                        {
+                            blackjackGame();
+                        }
+                    }
+
+                }while (fourButtonState == HIGH);
+            }
+        }else{
+            Serial.println("Button already pressed.");
         }
 
     } else {

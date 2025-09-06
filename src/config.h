@@ -11,6 +11,7 @@
 constexpr int firstButtonPin = 8;  // the number of the pushbutton pin
 constexpr int secButtonPin = 4; // pin for sec button
 constexpr int thirdButtonPin = 7; // pin for sec button
+constexpr int fourButtonPin = 2; // pin for sec button
 
 constexpr int yellowLedPin = 6;
 constexpr int redLedPin = 5;

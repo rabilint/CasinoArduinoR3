@@ -12,7 +12,6 @@ constexpr int MAX_CARDS = 5;
 
 bool buttonAlreadyPressed = false;
 bool thirdAlreadyPressed = false;
-bool secButAlreadyPressed = false;
 
 int firstButtonState = 0;
 int secButtonState = 0;
@@ -23,6 +22,9 @@ class Player
     int cards[MAX_CARDS];
     int cardsCount = 0 ;
 };
+
+Player dealer;
+Player user;
 
 void printPlayersCards(const Player& player, const Player& dealer, bool ShowOrNot)
 {
@@ -58,27 +60,14 @@ int calculateSum(const Player& p){
     }
     return sum;
 }
-void loop()
+void blackjackGame()
 {
 
     firstButtonState = digitalRead(firstButtonPin);
     secButtonState = digitalRead(secButtonPin);
     thirdButtonState = digitalRead(thirdButtonPin);
 
-    Player dealer;
-    Player user;
-    do
-    {
-        delay(1200);
-        secButAlreadyPressed = false;
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("still wanna play?");
 
-        if (secButtonState == HIGH)
-        {
-            if (!secButAlreadyPressed)
-            {
 
                 dealer.cardsCount = 0;
                 user.cardsCount = 0 ;
@@ -162,12 +151,6 @@ void loop()
                     lcd.print("It's a tie!");
                 }
 
-            }else
-            {
-                Serial.println("You have no idea what you want!");
-            }
-        }
-    }while (true);
 
 }
 

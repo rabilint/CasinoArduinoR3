@@ -5,12 +5,7 @@
 #ifndef UNTITLED2_BLACKJACK_H
 #define UNTITLED2_BLACKJACK_H
 
-
-class blackjack
-{
-    int pickingCard();
-    void game();
-};
+void blackjackGame();
 
 
 #endif //UNTITLED2_BLACKJACK_H
